@@ -1,0 +1,25 @@
+---
+# site.yml for satellite-tools
+
+- name: Project satellite-tools
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  
+  - name: Install Satellite Tools
+    package:
+      name: 
+        - katello-agent
+        - katello-host-tools-tracer
+      state: latest
+  
+  - name: Enable and Start Satellite Agent
+    service:
+      name: goferd
+      enabled: true
+      state: started
+
+  - name: Upload Tracer Files
+    shell: katello-tracer-upload
+    
